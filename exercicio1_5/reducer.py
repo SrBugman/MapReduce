@@ -2,11 +2,17 @@
 
 import sys
 
-totalCost = 0.0
+highCost = {}
 
 for line in sys.stdin:
 
-    totalCost += float(line.strip())
+    data = line.strip().split("\t")
+    
+    thisKey, thisSale = data
+    if thisKey not in highCost.keys():
+       highCost[thisKey] = float(thisSale)
+    else:
+       highCost[thisKey] += float(thisSale)
 
-# Escribe o coste mais alto, unha vez rematado o bucle
-print('O total de vendas foi de ' + str(totalCost))
+for key, cost in highCost.items():
+    print(key + '\t' + str(cost))

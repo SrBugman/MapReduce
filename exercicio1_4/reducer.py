@@ -2,13 +2,17 @@
 
 import sys
 
-highCost = 0.0
+highCost = {}
 
 for line in sys.stdin:
 
-    cost = float(line.strip())
-    if float(cost) > float(highCost):
-       highCost = cost
+    data = line.strip().split("\t")
+    
+    thisKey, thisSale = data
+    if thisKey not in highCost.keys():
+       highCost[thisKey] = float(thisSale)
+    else:
+       highCost[thisKey] += float(thisSale)
 
-# Escribe o coste máis alto, unha vez rematado o bucle
-print(str(highCost))
+for key, cost in highCost.items():
+    print(key + '\t' + str(cost))
